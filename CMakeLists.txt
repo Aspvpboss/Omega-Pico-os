@@ -29,19 +29,19 @@ project(sigma-os C CXX ASM)
 pico_sdk_init()
 
 # This is where you add new source files
-add_executable(sigma-os
+add_executable(omega-os
     src/main.c
 )
 
-pico_set_program_name(sigma-os "sigma-os")
-pico_set_program_version(sigma-os "0.1")
+pico_set_program_name(omega-os "sigma-os")
+pico_set_program_version(omega-os "0.1")
 
 # Modify the below lines to enable/disable output over UART/USB
-pico_enable_stdio_uart(sigma-os 1)
-pico_enable_stdio_usb(sigma-os 1)
+pico_enable_stdio_uart(omega-os 1)
+pico_enable_stdio_usb(omega-os 1)
 
 # Add any pico libraries you use here to link them
-target_link_libraries(sigma-os
+target_link_libraries(omega-os
     # Core runtime & standard I/O
     pico_stdlib
 
@@ -67,9 +67,9 @@ target_link_libraries(sigma-os
 )
 
 # Add the standard include files to the build
-target_include_directories(sigma-os 
+target_include_directories(omega-os 
     PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/src
 )
 
-pico_add_extra_outputs(sigma-os)
+pico_add_extra_outputs(omega-os)
