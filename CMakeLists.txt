@@ -42,6 +42,7 @@ pico_enable_stdio_usb(omega-os 1)
 
 # Add any pico libraries you use here to link them
 target_link_libraries(omega-os
+
     # Core runtime & standard I/O
     pico_stdlib
 
@@ -71,5 +72,7 @@ target_include_directories(omega-os
     PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/src
 )
+pico_set_linker_script(omega-os ${CMAKE_CURRENT_SOURCE_DIR}/src/kernel.ld)
+
 
 pico_add_extra_outputs(omega-os)
