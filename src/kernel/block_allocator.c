@@ -5,7 +5,7 @@
 static block_header_t *free_list = NULL;
 static usize MAX_HEAP_AMOUNT = 0; 
 
-void init_malloc(){
+void block_init_malloc(){
 
     MAX_HEAP_AMOUNT = __HeapLimit - __end__;
 
@@ -36,7 +36,7 @@ void *block_malloc(size_t size){
     if(!current || current->size < size)
         return NULL;
 
-    if(current->size >= sizeof(block_header_t) + size + 1){
+    if(current->size >= sizeof(block_header_t) + size + 4){
 
         block_header_t *new_block = (block_header_t*)((u8*)current + sizeof(block_header_t) + size);
 
@@ -75,7 +75,7 @@ void block_free(void *mem){
 
 usize block_allocated_memory() {
     block_header_t *current = free_list;
-    usize total_usage;
+    usize total_usage = 0;
     while(current){
         if(current->free == false)
             total_usage += current->size + sizeof(block_header_t);
@@ -87,7 +87,7 @@ usize block_allocated_memory() {
 
 usize block_available_memory() {
     block_header_t *current = free_list;
-    usize total_free;
+    usize total_free = 0;
     while(current){
         if(current->free == true)
             total_free += current->size + sizeof(block_header_t);

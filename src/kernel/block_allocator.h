@@ -7,7 +7,7 @@ typedef struct block_header_t {
     usize size;
     struct block_header_t *next;
     bool free;
-} block_header_t;
+} __attribute__((packed)) block_header_t;
 
 void block_init_malloc();
 void block_free(void *mem);
