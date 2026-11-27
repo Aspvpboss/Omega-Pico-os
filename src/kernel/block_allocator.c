@@ -56,7 +56,7 @@ void *block_malloc(size_t size){
 
 
 
-void free_block(void *mem){
+void block_free(void *mem){
 
     if(!mem)
         return;
@@ -70,4 +70,29 @@ void free_block(void *mem){
 
         current->next = current->next->next;
     }
+}
+
+
+usize block_allocated_memory() {
+    block_header_t *current = free_list;
+    usize total_usage;
+    while(current){
+        if(current->free == false)
+            total_usage += current->size + sizeof(block_header_t);
+        current = current->next;
+    }
+
+    return total_usage;
+}
+
+usize block_available_memory() {
+    block_header_t *current = free_list;
+    usize total_free;
+    while(current){
+        if(current->free == true)
+            total_free += current->size + sizeof(block_header_t);
+        current = current->next;
+    }
+
+    return total_free;
 }
