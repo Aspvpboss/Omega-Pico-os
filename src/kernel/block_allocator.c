@@ -19,16 +19,17 @@ void init_malloc(){
 
 void *block_malloc(size_t size){
 
+    // keeps block 32-bit aligned
     size = (size + 3) & ~3;
     
     if(size > MAX_HEAP_AMOUNT){
-         
         return NULL;
     }
    
     block_header_t *current = free_list;
 
-    while(current && (current->free == 0 || current->size < size)){
+    // finds free block that fits the size
+    while(current && (current->free == false || current->size < size)){
         current = current->next;
     }
 
@@ -40,7 +41,7 @@ void *block_malloc(size_t size){
         block_header_t *new_block = (block_header_t*)((u8*)current + sizeof(block_header_t) + size);
 
         new_block->size = current->size - size - sizeof(block_header_t);
-        new_block->free = 1;
+        new_block->free = true;
         new_block->next = current->next;
 
         current->size = size;
