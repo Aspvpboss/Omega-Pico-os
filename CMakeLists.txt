@@ -31,6 +31,8 @@ pico_sdk_init()
 # This is where you add new source files
 add_executable(omega-os
     src/main.c
+    src/kernel.c
+    src/kernel/block_allocator.c
 )
 
 pico_set_program_name(omega-os "sigma-os")
