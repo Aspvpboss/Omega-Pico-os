@@ -25,21 +25,15 @@ void *block_malloc(size_t size){
          
         return NULL;
     }
-        
    
     block_header_t *current = free_list;
-
 
     while(current && (current->free == 0 || current->size < size)){
         current = current->next;
     }
 
-    
-
     if(!current || current->size < size)
         return NULL;
-    
-    
 
     if(current->size >= sizeof(block_header_t) + size + 1){
 
@@ -75,5 +69,4 @@ void free_block(void *mem){
 
         current->next = current->next->next;
     }
-
 }
