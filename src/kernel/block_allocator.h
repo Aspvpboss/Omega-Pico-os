@@ -1,11 +1,16 @@
 #ifndef KERNEL_BLOCK_ALLOCATOR_H
 #define KERNEL_BLOCK_ALLOCATOR_H
 
-#include <stdint.h>
+#include "kernel/stdtypes.h"
 
-typedef struct {
-    size_t block;
+typedef struct block_header_t {
+    usize size;
+    struct block_header_t *next;
+    bool free;
 } block_header_t;
 
+void block_init_malloc();
+void free_block(void *mem);
+void *block_malloc(size_t size);
 
 #endif
