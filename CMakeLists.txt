@@ -31,6 +31,8 @@ pico_sdk_init()
 # This is where you add new source files
 add_executable(omega-os
     src/main.c
+    src/kernel.c
+    src/kernel/block_allocator.c
 )
 
 pico_set_program_name(omega-os "sigma-os")
@@ -72,7 +74,7 @@ target_include_directories(omega-os
     PRIVATE
         ${CMAKE_CURRENT_LIST_DIR}/src
 )
-pico_set_linker_script(omega-os ${CMAKE_CURRENT_SOURCE_DIR}/src/kernel.ld)
+pico_set_linker_script(omega-os ${CMAKE_CURRENT_SOURCE_DIR}/src/kernel/kernel.ld)
 
 
 pico_add_extra_outputs(omega-os)
